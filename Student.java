@@ -8,16 +8,16 @@
  * @since 2023-02-05.
  */
 
-public class student {
+public class Student {
     // Creating fields.
     String _firstName;
     String _lastName;
     String _midInt;
     int _grade;
     boolean _iep = false;
-  
+
     // Create constructors.
-    public void Student(String firstName, String lastName, 
+    public Student(String firstName, String lastName,
             String midInt, int grade, boolean IEP) {
         this._firstName = firstName;
         this._lastName = lastName;
@@ -26,25 +26,29 @@ public class student {
         this._iep = IEP;
     }
 
-    // Create another constructors. 
-    public void studNoMid(String firstName, String lastName,
+    // Create another constructors.
+    public Student(String firstName, String lastName,
             int grade, boolean IEP) {
         this._firstName = firstName;
         this._lastName = lastName;
+        this._midInt = "";
         this._grade = grade;
         this._iep = IEP;
     }
-    
+
     // Method for printing student name.
     public void print() {
         // Declare variable.
-        String name = _firstName + " ";
-        String userIEP;
-        
+        String name = _firstName;
+        final String userIEP;
+
         // If student does not has mid int.
         if (!_midInt.isEmpty()) {
-            name = name + _midInt + " ";
+            name = name + " " + _midInt + " ";
         }
+
+        // Include last name.
+        name = name + " " + _lastName;
 
         // If statement if student has IEP.
         if (_iep) {

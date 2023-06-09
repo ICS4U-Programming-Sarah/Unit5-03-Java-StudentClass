@@ -24,8 +24,7 @@ public class Main {
 
         try {
             // Create a new list.
-            final List<student> listOfStudents = 
-                new ArrayList<>();
+            final List<Student> listOfStudents = new ArrayList<>();
 
             // Create FileWriter object to write to file.
             final FileWriter fW = new FileWriter(fileOut);
@@ -38,22 +37,59 @@ public class Main {
                 // Read line as string.
                 final String newLine = sc.nextLine();
 
+                // In case of user entering empty line,
+                // display no strings found.
+                if (newLine.equals("")) {
+                    System.out.println("No data found on line.");
+                    continue;
+                }
+
                 // Declare array & variables.
                 final String[] arraySpace = newLine.split(" ");
                 final String firstName = arraySpace[0];
                 final String lastName;
-                final String midInti = "";
+                String midInti = "";
                 int grade = 0;
                 boolean iep = false;
+                Student student;
 
-
-                // Displays the user full name & grade.
-                if (midInti.isEmpty()) {
-                    // Create an instance.
-
-
+                // Checks to see if middle name
+                // is present.
+                if (arraySpace.length >= 5) {
+                    // Sets specified index.
+                    midInti = arraySpace[1];
+                    lastName = arraySpace[2];
+                    grade = Integer.parseInt(arraySpace[3]);
+                    iep = arraySpace[4].equals("y");
+                } else {
+                    lastName = arraySpace[1];
+                    grade = Integer.parseInt(arraySpace[2]);
+                    // To see if IEP is present.
+                    iep = arraySpace[3].equals("y");
                 }
 
+                // Format information & calls method.
+                if (!midInti.isEmpty()) {
+                    // Create a new Student object and add it to the list.
+                    student = new Student(firstName, lastName,
+                        midInti, grade, iep);
+                    student.print();
+                } else {
+                    // Create a new Student object and add it to the list.
+                    student = new Student(firstName,
+                            lastName, grade, iep);
+                    student.print();
+                }
+
+                // Add student to list.
+                listOfStudents.add(student);
+
+                // Declare variable & display how
+                // many students are in said class.
+                final int amountStudent = listOfStudents.size();
+                System.out.println("There are " + amountStudent
+                        + "  students in the class.");
+                System.out.println("");
             }
             // Closes scanner & writer.
             write.close();
@@ -63,6 +99,5 @@ public class Main {
             System.out.println("An error occurred: "
                     + error.getMessage());
         }
-
+    }
 }
-
